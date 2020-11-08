@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+# ProteinLigand Binding-prediction
 
-You can use the [editor on GitHub](https://github.com/sahithyaswaminathan/ProteinLigand-binding-prediction/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
+Sahithya Swaminathan
+2.12.2018
+```
+## Prerequisites
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+In order to run this script, install Python 2.7 and above
 
-### Jekyll Themes
+## Dataset
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/sahithyaswaminathan/ProteinLigand-binding-prediction/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Dataset was extracted from Protein-Databank (PDB) and contains only X,Y,Z- coordinates of atom along with type of atom (hydrophobic, hydrophilic)
 
-### Support or Contact
+## Data-Preprocessing
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Since each protein-ligand pair contains different number of atom size and type, it is important to pre-process the data to have a consistent atom number for administering into Convolution Neural Network model. A novel technique has been adopted to incorporate consistency. Min-Max normalization has been done on X,Y,Z-coordinates. A unit cube is divided into 20 bins and each atom with respective coordinates are accomodated in 20 bins. If the atom type in a specific bin has majority of of hydrophobic atoms, then the count of atom is encoded with -1 else, if hydrophilic atom count is greater than hydrophobic type, the count is encoded with +1.
+
+## Convolution Neural Network
+
+3-D CNN is built to train the model with Adam Optimizer and Cross-entropy loss function
+
+The code was built using Keras with Tensorflow background
